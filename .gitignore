@@ -1,0 +1,22 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.venv/
+
+# IDE settings
+.idea/
+.vscode/
+
+# Training outputs
+loss_curve.png
+
+# Local databases
+*.db
+*.sqlite3
+
+# Operating system files
+.DS_Store
+Thumbs.db
