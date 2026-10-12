@@ -10,7 +10,30 @@ from pydantic import BaseModel
 from model import TinyChatbot
 from chat import generate
 
+import csv
+import random
+
 ROOT = Path(__file__).resolve().parent
+
+# Load training examples from two datasets
+dataset_pairs = []
+
+for filename in ["dataset.csv", "dataset_2.csv"]:
+    with (ROOT / filename).open(
+        encoding="utf-8",
+        newline=""
+    ) as handle:
+        reader = csv.DictReader(handle)
+
+        dataset_pairs.extend(
+            {
+                "question": row["question"],
+                "answer": row["answer"]
+            }
+            for row in reader
+        )
+
+print(f"Loaded {len(dataset_pairs)} training examples.")
 
 app = FastAPI()
 
@@ -70,3 +93,37 @@ def chat(request: ChatRequest):
     )
 
     return {"answer": answer}
+
+
+# Random token API
+@app.get("/api/random-tokens")
+def random_tokens():
+    if isinstance(vocabulary, dict):
+        if "stoi" in vocabulary:
+            tokens = list(vocabulary["stoi"].keys())
+        elif "token_to_id" in vocabulary:
+            tokens = list(vocabulary["token_to_id"].keys())
+        elif "itos" in vocabulary:
+            tokens = list(vocabulary["itos"])
+        elif "id_to_token" in vocabulary:
+            tokens = list(vocabulary["id_to_token"].values())
+        else:
+            tokens = list(vocabulary.keys())
+    else:
+        tokens = list(vocabulary)
+
+    selected = random.sample(tokens, min(20, len(tokens)))
+
+    return {"tokens": selected}
+
+
+# Random training examples API
+@app.get("/api/random-examples")
+def random_examples():
+    selected = random.sample(
+        dataset_pairs,
+        min(3, len(dataset_pairs))
+    )
+
+    return {"examples": selected}
+

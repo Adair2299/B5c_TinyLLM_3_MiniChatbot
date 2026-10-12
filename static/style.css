@@ -13,10 +13,21 @@ body {
     min-height: 100vh;
 }
 
-.chat-container {
-    width: 90%;
-    max-width: 750px;
+/* Main layout */
+
+.app-container {
+    width: 95%;
+    max-width: 1250px;
     height: 85vh;
+    display: flex;
+    gap: 20px;
+}
+
+/* Left: Chat interface */
+
+.chat-container {
+    flex: 3;
+    min-width: 0;
     background: white;
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
@@ -92,6 +103,82 @@ header p {
     border-color: #2563eb;
 }
 
+/* Right: Information panel */
+
+.info-panel {
+    flex: 2;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+}
+
+.info-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.section-header h2 {
+    font-size: 17px;
+    margin: 0;
+}
+
+/* Token grid: 5 columns */
+
+#token-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.token-item {
+    background: #f0f1f4;
+    border-radius: 8px;
+    padding: 10px 4px;
+    text-align: center;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+/* Training examples */
+
+#examples-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.example-item {
+    background: #f0f1f4;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.example-question {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.example-answer {
+    color: #555;
+}
+
+/* Buttons */
+
 button {
     padding: 12px 24px;
     background: #2563eb;
@@ -103,4 +190,165 @@ button {
 
 button:hover {
     background: #1d4ed8;
+}
+
+.section-header button {
+    padding: 7px 12px;
+    font-size: 12px;
+    background: transparent;
+    color: #2563eb;
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+}
+
+.section-header button:hover {
+    background: #eff6ff;
+}
+
+/* Responsive layout */
+
+@media (max-width: 800px) {
+    body {
+        align-items: flex-start;
+        padding: 15px 0;
+    }
+
+    .app-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .chat-container {
+        flex: none;
+        height: 65vh;
+        min-height: 350px;
+    }
+
+    .info-panel {
+        flex: none;
+        overflow-y: visible;
+    }
+}
+
+
+
+/* Example questions */
+
+.example-prompts {
+    margin: 0 20px 8px;
+    padding: 14px;
+    background: #f8faff;
+    border: 1px solid #e0e7ff;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.example-prompts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.example-prompts-header h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.example-prompts-header p {
+    margin: 4px 0 0;
+    font-size: 11px;
+    color: #888;
+}
+
+/* Transparent blue Shuffle button */
+
+#shuffle-prompts-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+    color: #2563eb;
+    background: transparent;
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+#shuffle-prompts-btn:hover {
+    background: #eff6ff;
+}
+
+/* Three questions in one row */
+
+#prompt-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.prompt-item {
+    padding: 9px 7px;
+    background: white;
+    color: #2563eb;
+    border: 1px solid #dbeafe;
+    border-radius: 8px;
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+    overflow-wrap: anywhere;
+}
+
+.prompt-item:hover {
+    background: #eff6ff;
+    border-color: #2563eb;
+}
+
+/* Mobile layout */
+
+@media (max-width: 600px) {
+    #prompt-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+#chat-box {
+    min-height: 0;
+}
+
+
+/* Fixed example questions above the input */
+
+.prompt-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#toggle-prompts-btn {
+    padding: 6px 9px;
+    background: transparent;
+    color: #2563eb;
+    border: 1px solid #dbeafe;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+#toggle-prompts-btn:hover {
+    background: #eff6ff;
+}
+
+/* Collapsed state */
+
+.example-prompts.collapsed {
+    padding: 10px 14px;
+}
+
+.example-prompts.collapsed .example-prompts-header {
+    margin-bottom: 0;
+}
+
+.example-prompts.collapsed #prompt-list,
+.example-prompts.collapsed .example-prompts-header p,
+.example-prompts.collapsed #shuffle-prompts-btn {
+    display: none;
 }

@@ -10,28 +10,99 @@
 </head>
 
 <body>
-    <div class="chat-container">
-        <header>
-            <h1>Tiny English Chatbot</h1>
-            <p>Powered by my own Transformer model</p>
-        </header>
+    <div class="app-container">
 
-        <main id="chat-box">
-            <div class="message bot">
-                Hello! Ask me a question.
+        <!-- Left: Chat interface -->
+        <div class="chat-container">
+            <header>
+                <h1>Tiny English Chatbot</h1>
+                <p>Powered by my own Transformer model</p>
+            </header>
+
+            <main id="chat-box">
+                <div class="message bot">
+                    Hello! Ask me a question.
+                </div>
+            </main>
+
+            <div class="example-prompts" id="example-prompts">
+                <div class="example-prompts-header">
+                    <div>
+                        <h3>Example Questions</h3>
+                        <p>Click a question to fill the input box.</p>
+                    </div>
+
+                    <div class="prompt-controls">
+                        <button type="button" id="shuffle-prompts-btn">
+                            &#x21C4; Shuffle
+                        </button>
+
+                        <button
+                            type="button"
+                            id="toggle-prompts-btn"
+                            aria-label="Collapse example questions"
+                            aria-expanded="true"
+                        >
+                            &#x25BC;
+                        </button>
+                    </div>
+                </div>
+
+                <div id="prompt-list"></div>
             </div>
-        </main>
 
-        <form id="chat-form">
-            <input
-                type="text"
-                id="user-input"
-                placeholder="Type your message..."
-                autocomplete="off"
-                required
-            >
-            <button type="submit">Send</button>
-        </form>
+
+            <form id="chat-form">
+                <input
+                    type="text"
+                    id="user-input"
+                    placeholder="Type your message..."
+                    autocomplete="off"
+                    required
+                >
+                <button type="submit">Send</button>
+            </form>
+        </div>
+
+        <!-- Right: Model information -->
+        <aside class="info-panel">
+
+            <!-- Token vocabulary -->
+            <section class="info-card">
+                <div class="section-header">
+                    <h2>Token Vocabulary</h2>
+                    <button
+                        type="button"
+                        id="random-tokens-btn"
+                    >
+                        <span>&#x21C4;</span> Shuffle
+                    </button>
+                </div>
+
+                <div id="token-grid">
+                    <!-- Tokens will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Training examples -->
+            <section class="info-card">
+                <div class="section-header">
+                    <h2>Training Examples</h2>
+                    <button
+                        type="button"
+                        id="random-examples-btn"
+                    >
+                        <span>&#x21C4;</span> Shuffle
+                    </button>
+                </div>
+
+                <div id="examples-list">
+                    <!-- Examples will be loaded here -->
+                </div>
+            </section>
+
+        </aside>
+
     </div>
 </body>
 </html>
