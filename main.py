@@ -112,7 +112,7 @@ def random_tokens():
     else:
         tokens = list(vocabulary)
 
-    selected = random.sample(tokens, min(20, len(tokens)))
+    selected = random.sample(tokens, min(15, len(tokens)))
 
     return {"tokens": selected}
 

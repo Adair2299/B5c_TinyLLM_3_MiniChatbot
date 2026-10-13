@@ -20,3 +20,5 @@ loss_curve.png
 # Operating system files
 .DS_Store
 Thumbs.db
+
+push.bat
